@@ -1,12 +1,36 @@
-name: 'Container Action Template'
-description: 'Get started with Container actions'
-author: 'GitHub'
-inputs: 
-  myInput:
-    description: 'Input to use'
-    default: 'world'
+name: 'Slack Deployment Release QA Gate'
+description: 'An opinionated Github action that posts a Slack message containing deployment information and buttons that allow for rejection or approval of the release.'
+author: 'Tochukwu Victor'
+inputs:
+  slack_bot_token:
+    description: 'Slack bot token used to make the chat.postMessage API call. Token should be prefixed by xoxb-'
+    required: true
+  slack_channel_name:
+    description: 'Name of the slack channel where the bot should post the QA gate message.'
+    required: true
+  app:
+    description: 'Name of the application being deployed to. Using the github.repository variable as the value for this arg is recommended.'
+    required: true
+  commit_message_subject:
+    description: 'First line of the commit message associated with the deployment. See the git-commit-data-action (https://github.com/rlespinasse/git-commit-data-action) for an option to expose this value.'
+    required: true
+  committer_name:
+    description: 'Full name associated with the commit being deployed. See the git-commit-data-action (https://github.com/rlespinasse/git-commit-data-action) for an option to expose this value.'
+    required: true
+  commit_sha:
+    description: 'Full git SHA associated with the deployment. See the git-commit-data-action (https://github.com/rlespinasse/git-commit-data-action) for an option to expose this value.'
+    required: true
+  endpoint:
+    description: 'Optional endpoint of the staging environment that was deployed as part of this pipeline. Defaults to the git repo URL where the pipeline is being run.'
+    required: false
 runs:
   using: 'docker'
   image: 'Dockerfile'
   args:
-    - ${{ inputs.myInput }}
+    - ${{ inputs.slack_bot_token }}
+    - ${{ inputs.slack_channel_name }}
+    - ${{ inputs.app }}
+    - ${{ inputs.commit_message_subject }}
+    - ${{ inputs.committer_name }}
+    - ${{ inputs.commit_sha }}
+    - ${{ inputs.endpoint }}

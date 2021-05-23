@@ -1,4 +1,4 @@
-FROM alpine:3.10
+FROM curlimages/curl:7.76.1
 
 COPY LICENSE README.md /
 
