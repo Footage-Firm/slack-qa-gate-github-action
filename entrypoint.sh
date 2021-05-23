@@ -19,7 +19,6 @@ curl -X POST https://slack.com/api/chat.postMessage \
   --data-binary @- << EOF
 {
   "channel": "$SLACK_CHANNEL_NAME",
-  "as_user": false,
   "icon_emoji": ":github-actions:",
   "blocks": [
     {

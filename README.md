@@ -22,7 +22,7 @@ jobs:
           Do your deploy
 
       - name: Notify slack
-        uses: Footage-Firm/slack-qa-gate-github-action@v1
+        uses: Footage-Firm/slack-qa-gate-github-action@1.0.0
         with:
           slack_bot_token: ${{ secrets.SLACK_BOT_TOKEN }}
           slack_channel_name: "some-deployment-channel"
