@@ -62,6 +62,7 @@ curl -X POST https://slack.com/api/chat.postMessage \
       }
     },
     {
+      "block_id": "divider_1",
       "type": "divider"
     },
     {
