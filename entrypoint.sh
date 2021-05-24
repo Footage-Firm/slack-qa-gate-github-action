@@ -73,10 +73,10 @@ curl -X POST https://slack.com/api/chat.postMessage \
           "type": "button",
           "text": {
             "type": "plain_text",
-            "text": "View :mag:",
+            "text": "View Endpoint :mag:",
             "emoji": true
           },
-          "value": "view_release",
+          "value": "view_endpoint",
           "url": "$ENDPOINT"
         },
         {
