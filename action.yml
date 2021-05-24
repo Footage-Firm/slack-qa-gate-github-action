@@ -8,9 +8,14 @@ inputs:
   slack_channel_name:
     description: 'Name of the slack channel where the bot should post the QA gate message.'
     required: true
-  app:
+
+  app_endpoint:
+    description: 'Endpoint of the environment that was deployed as part of this pipeline. If there is not an endpoint you have exposed, just use the git repo URL where the pipeline is being run.'
+    required: true
+  app_name:
     description: 'Name of the application being deployed to. Using the github.repository variable as the value for this arg is recommended.'
     required: true
+
   commit_message_subject:
     description: 'First line of the commit message associated with the deployment. See the git-commit-data-action (https://github.com/rlespinasse/git-commit-data-action) for an option to expose this value.'
     required: true
@@ -20,17 +25,17 @@ inputs:
   commit_sha:
     description: 'Full git SHA associated with the deployment. See the git-commit-data-action (https://github.com/rlespinasse/git-commit-data-action) for an option to expose this value.'
     required: true
-  endpoint:
-    description: 'Optional endpoint of the staging environment that was deployed as part of this pipeline. Defaults to the git repo URL where the pipeline is being run.'
-    required: false
+
 runs:
   using: 'docker'
   image: 'Dockerfile'
   args:
     - ${{ inputs.slack_bot_token }}
     - ${{ inputs.slack_channel_name }}
-    - ${{ inputs.app }}
+
+    - ${{ inputs.app_endpoint }}
+    - ${{ inputs.app_name }}
+
     - ${{ inputs.commit_message_subject }}
     - ${{ inputs.committer_name }}
     - ${{ inputs.commit_sha }}
-    - ${{ inputs.endpoint }}

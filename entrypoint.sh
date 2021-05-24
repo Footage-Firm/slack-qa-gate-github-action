@@ -5,12 +5,13 @@ set -eu
 SLACK_BOT_TOKEN="${1?Must provide slack bot token}"
 SLACK_CHANNEL_NAME="${2?Must provide slack channel ID}"
 
-APP="${3?Must provide app name}"
-COMMIT_MESSAGE_SUBJECT="${4?Must provide commit message subject}"
-COMMITTER_NAME="${5?Must provide committer name}"
-COMMIT_SHA="${6?Must provide commit sha}"
+APP_ENDPOINT="${3?Must provide app endpoint}"
+APP_NAME="${4?Must provide app name}"
+
+COMMIT_MESSAGE_SUBJECT="${5?Must provide commit message subject}"
+COMMITTER_NAME="${6?Must provide committer name}"
+COMMIT_SHA="${7?Must provide commit sha}"
 COMMIT_SHA_SHORT="$(echo "$COMMIT_SHA" | head -c 10)"
-ENDPOINT="${7:-https://github.com/$GITHUB_REPOSITORY}"
 
 
 curl -X POST https://slack.com/api/chat.postMessage \
@@ -26,7 +27,7 @@ curl -X POST https://slack.com/api/chat.postMessage \
       "type": "section",
       "text": {
         "type": "mrkdwn",
-        "text": "*<https://github.com/$GITHUB_REPOSITORY/actions|[$APP] deployed to staging>* :rocket:"
+        "text": "*<https://github.com/$GITHUB_REPOSITORY/actions|[$APP_NAME] deployed to staging>* :rocket:"
       }
     },
     {
@@ -77,7 +78,7 @@ curl -X POST https://slack.com/api/chat.postMessage \
             "emoji": true
           },
           "value": "view_endpoint",
-          "url": "$ENDPOINT"
+          "url": "$APP_ENDPOINT"
         },
         {
           "type": "button",
