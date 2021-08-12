@@ -4,13 +4,14 @@ set -eu
 
 SLACK_BOT_TOKEN="${1?Must provide slack bot token}"
 SLACK_CHANNEL_NAME="${2?Must provide slack channel ID}"
+SLACK_MESSAGE_TS="${3?Must provide slack message timestamp}"
 
-APP_ENDPOINT="${3?Must provide app endpoint}"
-APP_NAME="${4?Must provide app name}"
+APP_ENDPOINT="${4?Must provide app endpoint}"
+APP_NAME="${5?Must provide app name}"
 
-COMMIT_MESSAGE_SUBJECT="${5?Must provide commit message subject}"
-COMMITTER_NAME="${6?Must provide committer name}"
-COMMIT_SHA="${7?Must provide commit sha}"
+COMMIT_MESSAGE_SUBJECT="${6?Must provide commit message subject}"
+COMMITTER_NAME="${7?Must provide committer name}"
+COMMIT_SHA="${8?Must provide commit sha}"
 COMMIT_SHA_SHORT="$(echo "$COMMIT_SHA" | head -c 10)"
 
 
@@ -20,6 +21,7 @@ curl -X POST https://slack.com/api/chat.postMessage \
   --data-binary @- << EOF
 {
   "channel": "$SLACK_CHANNEL_NAME",
+  "ts": "$SLACK_MESSAGE_TS",
   "icon_emoji": ":github-actions:",
   "blocks": [
     {
