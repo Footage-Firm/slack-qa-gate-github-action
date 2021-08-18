@@ -15,7 +15,7 @@ COMMIT_SHA="${8?Must provide commit sha}"
 COMMIT_SHA_SHORT="$(echo "$COMMIT_SHA" | head -c 10)"
 
 
-curl -X POST https://slack.com/api/chat.postMessage \
+curl -X POST https://slack.com/api/chat.update \
   -H "Content-type: application/json; charset=utf-8" \
   -H "Authorization: Bearer $SLACK_BOT_TOKEN" \
   --data-binary @- << EOF
