@@ -100,20 +100,20 @@ curl -X POST https://slack.com/api/chat.update \
           },
           "value": "reject_release"
         },
-				{
-					"type": "overflow",
-					"options": [
-						{
-							"text": {
-								"type": "plain_text",
-								"text": "Rollback",
-								"emoji": true
-							},
-							"value": "rollback"
-						}
-					],
-					"action_id": "overflow-action"
-				}
+        {
+          "type": "overflow",
+          "options": [
+            {
+              "text": {
+                "type": "plain_text",
+                "text": "Rollback",
+                "emoji": true
+              },
+              "value": "rollback"
+            }
+          ],
+          "action_id": "overflow-action"
+        }
       ]
     }
   ]
